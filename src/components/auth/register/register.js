@@ -13,6 +13,7 @@ class Register extends Component {
     password: "",
     conformPassword: "",
     error: "",
+    db: firebase.firestore(),
   };
 
   onInputChange = (e) => {
@@ -25,21 +26,6 @@ class Register extends Component {
     //   email: this.state.email,
     //   password: this.state.password,
     // });
-
-    // if (this.formValid()) {
-    //   firebase
-    //     .auth()
-    //     .createUserWithEmailAndPassword(this.state.email, this.state.password)
-    //     .then((createdUser) => {
-    //       console.log("register success");
-    //       console.log(createdUser.user);
-    //       this.setState({ error: "" });
-    //     })
-    //     .catch((error) => {
-    //       console.log(error.message);
-    //       this.setState({ error: error.message });
-    //     });
-    // }
 
     if (this.formValid()) {
       firebase
@@ -54,9 +40,17 @@ class Register extends Component {
               displayName: this.state.displayName,
             })
             .then(() => {
-              // this.saveUser(createdUser).then(() => {
-              //   console.log("user saved");
-              // });
+              console.log(createdUser);
+              this.saveUser(createdUser)
+                .then(() => {
+                  console.log("user saved");
+                })
+                .catch((error) => {
+                  console.log(error.message);
+                });
+            })
+            .catch((error) => {
+              console.log(error.message);
             });
         })
         .catch((error) => {
@@ -64,6 +58,14 @@ class Register extends Component {
           this.setState({ error: error.message });
         });
     }
+  };
+
+  saveUser = (createdUser) => {
+    return this.state.db.collection("users").doc(createdUser.user.uid).set({
+      uid: createdUser.user.uid,
+      email: createdUser.user.email,
+      name: createdUser.user.displayName,
+    });
   };
 
   formValid = () => {
