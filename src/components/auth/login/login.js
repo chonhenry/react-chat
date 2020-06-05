@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./login.scss";
-import firebase from "../../../firebase/firebase";
+// import firebase from "../../../firebase/firebase";
 import { connect } from "react-redux";
 import { LoginAction } from "../../../store/actions/index";
 

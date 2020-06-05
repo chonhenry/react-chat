@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import Login from "./components/auth/login/login";
 import Register from "./components/auth/register/register";
 import Home from "./components/message/home";
@@ -26,12 +26,13 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route
-            exact
-            path="/"
-            component={this.props.currentUser ? Home : Login}
-          />
-          <Route path="/register" component={Register} />
+          <Route exact path="/">
+            {this.props.currentUser ? <Home /> : <Login />}
+          </Route>
+
+          <Route path="/register">
+            {this.props.currentUser ? <Redirect to="/" /> : <Register />}
+          </Route>
         </Switch>
       </BrowserRouter>
     );
