@@ -5,9 +5,7 @@ import firebase from "../../firebase/firebase";
 // import { LogoutAction } from "../../store/actions/index";
 
 class Home extends Component {
-  componentDidMount = () => {
-    console.log(this.props.isLoading);
-  };
+  componentDidMount = () => {};
 
   onClickLogout = () => {
     // this.props.LogoutAction();

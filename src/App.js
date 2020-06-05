@@ -2,8 +2,10 @@ import React from "react";
 // import ReactDOM from "react-dom";
 import Login from "./components/auth/login/login";
 import Register from "./components/auth/register/register";
+import Spinner from "./components/spinner";
 import Home from "./components/message/home";
 import "./App.css";
+import "semantic-ui-css/semantic.min.css";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import firebase from "./firebase/firebase";
 import { connect } from "react-redux";
@@ -23,19 +25,23 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this.props.currentUser ? <Home /> : <Redirect to="/login" />}
-          </Route>
+        {this.props.isLoading ? (
+          <Spinner></Spinner>
+        ) : (
+          <Switch>
+            <Route exact path="/">
+              {this.props.currentUser ? <Home /> : <Redirect to="/login" />}
+            </Route>
 
-          <Route path="/register">
-            {this.props.currentUser ? <Redirect to="/" /> : <Register />}
-          </Route>
+            <Route path="/register">
+              {this.props.currentUser ? <Redirect to="/" /> : <Register />}
+            </Route>
 
-          <Route path="/login">
-            {this.props.currentUser ? <Redirect to="/" /> : <Login />}
-          </Route>
-        </Switch>
+            <Route path="/login">
+              {this.props.currentUser ? <Redirect to="/" /> : <Login />}
+            </Route>
+          </Switch>
+        )}
       </BrowserRouter>
     );
   }
