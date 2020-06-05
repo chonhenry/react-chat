@@ -6,19 +6,18 @@ import Home from "./components/message/home";
 import "./App.css";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import firebase from "./firebase/firebase";
+import { connect } from "react-redux";
+import {
+  SetCurrentUser,
+  LoginAction,
+  LogoutAction,
+} from "./store/actions/index";
 
 class App extends React.Component {
-  state = {
-    user_exist: null,
-  };
-
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user);
       if (user) {
-        this.setState({ user_exist: true });
-      } else {
-        this.setState({ user_exist: false });
+        this.props.SetCurrentUser(user);
       }
     });
   };
@@ -30,7 +29,7 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            component={this.state.user_exist ? Home : Login}
+            component={this.props.currentUser ? Home : Login}
           />
           <Route path="/register" component={Register} />
         </Switch>
@@ -39,4 +38,12 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { currentUser: state.currentUser.currentUser };
+};
+
+export default connect(mapStateToProps, {
+  SetCurrentUser,
+  LoginAction,
+  LogoutAction,
+})(App);
