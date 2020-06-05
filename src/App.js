@@ -26,7 +26,7 @@ class App extends React.Component {
             {this.props.currentUser ? (
               <Home />
             ) : this.props.isLoading ? (
-              <div>loading</div>
+              <div>Loading</div>
             ) : (
               <Redirect to="/login" />
             )}

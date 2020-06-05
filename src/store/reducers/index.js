@@ -12,11 +12,19 @@ const authReducer = (state = initAuthState, action) => {
         isLoading: false,
       };
     case "LOGIN_SUCCESS":
-      return { ...initAuthState, currentUser: action.payload };
+      return {
+        ...initAuthState,
+        currentUser: action.payload,
+        isLoading: false,
+      };
     case "LOGOUT_SUCCESS":
-      return { ...initAuthState, currentUser: null, isLoading: false };
+      return { ...initAuthState, currentUser: null, isLoading: true };
     case "REGISTER_SUCCESS":
-      return { ...initAuthState, currentUser: action.payload };
+      return {
+        ...initAuthState,
+        currentUser: action.payload,
+        isLoading: false,
+      };
     default:
       return state;
   }

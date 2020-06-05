@@ -5,6 +5,10 @@ import { connect } from "react-redux";
 import { LogoutAction } from "../../store/actions/index";
 
 class Home extends Component {
+  componentDidMount = () => {
+    console.log(this.props.isLoading);
+  };
+
   onClickLogout = () => {
     this.props.LogoutAction();
   };
@@ -19,7 +23,10 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { currentUser: state.currentUser.currentUser };
+  return {
+    currentUser: state.currentUser.currentUser,
+    isLoading: state.currentUser.isLoading,
+  };
 };
 
 export default connect(mapStateToProps, { LogoutAction })(Home);
