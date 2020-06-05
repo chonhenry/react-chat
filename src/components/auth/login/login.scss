@@ -10,20 +10,16 @@
     // border: 1px solid red;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    height: 250px;
-
-    // .far {
-    //   margin: 30px 0;
-    // }
+    // height: 350px;
 
     .input {
-      margin: 20px 30px;
-      width: 200px;
+      margin: 20px 30px 0 30px;
+      width: 250px;
       border-radius: 100px;
       border-style: solid;
-      height: 30px;
+      height: 40px;
       padding: 0 10px;
 
       &:focus {
@@ -32,6 +28,7 @@
     }
 
     .login-btn {
+      margin-top: 20px;
       border: 1px solid black;
       background-color: white;
       height: 30px;
@@ -44,6 +41,15 @@
       &:hover {
         cursor: pointer;
       }
+    }
+
+    .error-message {
+      margin-top: 20px;
+      color: red;
+    }
+
+    .message {
+      margin-top: 20px;
     }
   }
 }

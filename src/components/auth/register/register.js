@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./register.scss";
 import firebase from "../../../firebase/firebase";
+import { Link } from "react-router-dom";
 // import { Redirect, Link } from "react-router-dom";
 // import { connect } from "react-redux";
 // import { RegisterAction } from "../../../store/actions/index";
@@ -69,6 +70,9 @@ class Register extends Component {
             onChange={(e) => this.onInputChange(e)}
           />
           <button className="register-btn">REGISTER</button>
+          <p>
+            Already a user? <Link to="/login">Login</Link>
+          </p>
         </form>
       </div>
     );

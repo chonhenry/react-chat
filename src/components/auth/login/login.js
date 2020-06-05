@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "./login.scss";
 import firebase from "../../../firebase/firebase";
+import { Link } from "react-router-dom";
 // import { connect } from "react-redux";
 // import { LoginAction } from "../../../store/actions/index";
 
 class Login extends Component {
-  state = { email: "", password: "" };
+  state = { email: "", password: "", error: "" };
 
   onInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -24,9 +25,11 @@ class Login extends Component {
       .then((signedUser) => {
         console.log("signin success");
         console.log(signedUser.user);
+        this.setState({ error: "" });
       })
       .catch((error) => {
         console.log(error.message);
+        this.setState({ error: error.message });
       });
   };
 
@@ -52,6 +55,14 @@ class Login extends Component {
             onChange={(e) => this.onInputChange(e)}
           />
           <button className="login-btn">LOGIN</button>
+
+          {this.state.error.length ? (
+            <div className="error-message">{this.state.error}</div>
+          ) : null}
+
+          <div className="message">
+            Don't have an account? <Link to="/login">Register</Link>
+          </div>
         </form>
       </div>
     );
