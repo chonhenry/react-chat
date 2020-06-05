@@ -1,8 +1,21 @@
 import React, { Component } from "react";
+import firebase from "../../../firebase/firebase";
+import { connect } from "react-redux";
 
 class UserInfo extends Component {
+  onClickLogout = () => {
+    // this.props.LogoutAction();
+    firebase
+      .auth()
+      .signOut()
+      .then(console.log("logout success"))
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   render() {
-    return <div></div>;
+    return <button onClick={this.onClickLogout}>logout</button>;
   }
 }
 
