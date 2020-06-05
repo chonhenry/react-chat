@@ -7,7 +7,13 @@ import { Link } from "react-router-dom";
 // import { RegisterAction } from "../../../store/actions/index";
 
 class Register extends Component {
-  state = { email: "", displayName: "", password: "", conformPassword: "" };
+  state = {
+    email: "",
+    displayName: "",
+    password: "",
+    conformPassword: "",
+    error: "",
+  };
 
   onInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -26,16 +32,18 @@ class Register extends Component {
       .then((registerdeUser) => {
         console.log("register success");
         console.log(registerdeUser.user);
+        this.setState({ error: "" });
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch((error) => {
+        console.log(error.message);
+        this.setState({ error: error.message });
       });
   };
 
   render() {
     return (
       <div className="register-form-container">
-        <form onSubmit={this.onRegisterSubmit} className="login-form">
+        <form onSubmit={this.onRegisterSubmit} className="register-form">
           <i className="far fa-comments fa-4x" />
           <input
             className="input displayName-input"
@@ -70,7 +78,12 @@ class Register extends Component {
             onChange={(e) => this.onInputChange(e)}
           />
           <button className="register-btn">REGISTER</button>
-          <p>
+
+          {this.state.error.length ? (
+            <div className="error-message">{this.state.error}</div>
+          ) : null}
+
+          <p className="message">
             Already a user? <Link to="/login">Login</Link>
           </p>
         </form>

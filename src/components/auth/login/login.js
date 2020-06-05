@@ -61,7 +61,7 @@ class Login extends Component {
           ) : null}
 
           <div className="message">
-            Don't have an account? <Link to="/login">Register</Link>
+            Don't have an account? <Link to="/register">Register</Link>
           </div>
         </form>
       </div>
