@@ -3,7 +3,7 @@ import React from "react";
 import Login from "./components/auth/login/login";
 import Register from "./components/auth/register/register";
 import Spinner from "./components/spinner";
-import Home from "./components/message/home";
+import Home from "./components/message/home/home";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";

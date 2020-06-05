@@ -97,7 +97,7 @@ class Register extends Component {
           <input
             className="input email-input"
             type="text"
-            placeholder="Display Name"
+            placeholder="Username"
             name="displayName"
             value={this.state.displayName}
             onChange={(e) => this.onInputChange(e)}

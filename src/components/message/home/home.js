@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import firebase from "../../firebase/firebase";
+import firebase from "../../../firebase/firebase";
+import "./home.scss";
 // import { Link } from "react-router-dom";
 // import { connect } from "react-redux";
 // import { LogoutAction } from "../../store/actions/index";
@@ -20,8 +21,11 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="">
-        <button onClick={this.onClickLogout}>logout</button>
+      <div className="home-container">
+        <div className="left-panel">
+          <button onClick={this.onClickLogout}>logout</button>
+        </div>
+        <div className="right-panel"></div>
       </div>
     );
   }
