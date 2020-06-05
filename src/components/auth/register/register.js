@@ -26,14 +26,38 @@ class Register extends Component {
     //   password: this.state.password,
     // });
 
+    // if (this.formValid()) {
+    //   firebase
+    //     .auth()
+    //     .createUserWithEmailAndPassword(this.state.email, this.state.password)
+    //     .then((createdUser) => {
+    //       console.log("register success");
+    //       console.log(createdUser.user);
+    //       this.setState({ error: "" });
+    //     })
+    //     .catch((error) => {
+    //       console.log(error.message);
+    //       this.setState({ error: error.message });
+    //     });
+    // }
+
     if (this.formValid()) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then((registerdeUser) => {
+        .then((createdUser) => {
           console.log("register success");
-          console.log(registerdeUser.user);
+          console.log(createdUser.user);
           this.setState({ error: "" });
+          createdUser.user
+            .updateProfile({
+              displayName: this.state.displayName,
+            })
+            .then(() => {
+              // this.saveUser(createdUser).then(() => {
+              //   console.log("user saved");
+              // });
+            });
         })
         .catch((error) => {
           console.log(error.message);
