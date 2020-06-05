@@ -5,11 +5,26 @@
   max-width: 900px;
   margin: auto;
   display: flex;
+  align-items: center;
 
   .left-panel {
     background-color: lightseagreen;
     width: 300px;
     height: 100%;
+
+    .user-info {
+      border-bottom: 1px red solid;
+      height: 60px;
+    }
+
+    .search-box {
+      border-bottom: 1px red solid;
+      height: 60px;
+    }
+
+    .chat-record {
+      background-color: red;
+    }
   }
 
   .right-panel {

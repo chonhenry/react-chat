@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import firebase from "../../../firebase/firebase";
 import "./home.scss";
+import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 // import { connect } from "react-redux";
 // import { LogoutAction } from "../../store/actions/index";
 
 class Home extends Component {
-  componentDidMount = () => {};
+  componentDidMount = () => {
+    console.log("====");
+    console.log(this.props.currentUser.displayName);
+  };
 
   onClickLogout = () => {
     // this.props.LogoutAction();
@@ -23,7 +27,17 @@ class Home extends Component {
     return (
       <div className="home-container">
         <div className="left-panel">
-          <button onClick={this.onClickLogout}>logout</button>
+          <div className="user-info">
+            <div className="">
+              Signin as{" "}
+              <span className="display-name">
+                {this.props.currentUser.displayName}
+              </span>
+            </div>
+            <button onClick={this.onClickLogout}>logout</button>
+          </div>
+          <div className="search-box"></div>
+          <div className="chat-record"></div>
         </div>
         <div className="right-panel"></div>
       </div>
@@ -31,13 +45,10 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser.currentUser,
+  };
+};
 
-// const mapStateToProps = (state) => {
-//   return {
-//     currentUser: state.currentUser.currentUser,
-//     isLoading: state.currentUser.isLoading,
-//   };
-// };
-
-// export default connect(mapStateToProps, { LogoutAction })(Home);
+export default connect(mapStateToProps)(Home);
