@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./register.scss";
-// import firebase from "../../../firebase/firebase";
+import firebase from "../../../firebase/firebase";
 // import { Redirect, Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { RegisterAction } from "../../../store/actions/index";
+// import { connect } from "react-redux";
+// import { RegisterAction } from "../../../store/actions/index";
 
 class Register extends Component {
   state = { email: "", displayName: "", password: "", conformPassword: "" };
@@ -14,10 +14,21 @@ class Register extends Component {
 
   onRegisterSubmit = (e) => {
     e.preventDefault();
-    this.props.RegisterAction({
-      email: this.state.email,
-      password: this.state.password,
-    });
+    // this.props.RegisterAction({
+    //   email: this.state.email,
+    //   password: this.state.password,
+    // });
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then((registerdeUser) => {
+        console.log("register success");
+        console.log(registerdeUser.user);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   render() {
@@ -64,8 +75,10 @@ class Register extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { currentUser: state.currentUser.currentUser };
-};
+export default Register;
 
-export default connect(mapStateToProps, { RegisterAction })(Register);
+// const mapStateToProps = (state) => {
+//   return { currentUser: state.currentUser.currentUser };
+// };
+
+// export default connect(mapStateToProps, { RegisterAction })(Register);

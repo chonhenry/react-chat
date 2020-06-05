@@ -14,6 +14,8 @@ class App extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.props.SetCurrentUser(user);
+      } else {
+        this.props.SetCurrentUser(null);
       }
     });
   };
@@ -23,13 +25,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {this.props.currentUser ? (
-              <Home />
-            ) : this.props.isLoading ? (
-              <div>Loading</div>
-            ) : (
-              <Redirect to="/login" />
-            )}
+            {this.props.currentUser ? <Home /> : <Redirect to="/login" />}
           </Route>
 
           <Route path="/register">

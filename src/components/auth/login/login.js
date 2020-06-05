@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./login.scss";
-// import firebase from "../../../firebase/firebase";
-import { connect } from "react-redux";
-import { LoginAction } from "../../../store/actions/index";
+import firebase from "../../../firebase/firebase";
+// import { connect } from "react-redux";
+// import { LoginAction } from "../../../store/actions/index";
 
 class Login extends Component {
   state = { email: "", password: "" };
@@ -13,10 +13,21 @@ class Login extends Component {
 
   onSubmitLogin = (e) => {
     e.preventDefault();
-    this.props.LoginAction({
-      email: this.state.email,
-      password: this.state.password,
-    });
+    // this.props.LoginAction({
+    //   email: this.state.email,
+    //   password: this.state.password,
+    // });
+
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then((signedUser) => {
+        console.log("signin success");
+        console.log(signedUser.user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   render() {
@@ -47,11 +58,13 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { currentUser: state.currentUser.currentUser };
-};
+export default Login;
 
-export default connect(mapStateToProps, { LoginAction })(Login);
+// const mapStateToProps = (state) => {
+//   return { currentUser: state.currentUser.currentUser };
+// };
+
+// export default connect(mapStateToProps, { LoginAction })(Login);
 
 // render() {
 //     return (
