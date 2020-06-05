@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../../firebase/firebase";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { LogoutAction } from "../../store/actions/index";
 

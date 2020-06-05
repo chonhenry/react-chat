@@ -1,16 +1,20 @@
 import { combineReducers } from "redux";
 // import firebase from "../../firebase/firebase";
 
-const initAuthState = { currentUser: null };
+const initAuthState = { currentUser: null, isLoading: true };
 
 const authReducer = (state = initAuthState, action) => {
   switch (action.type) {
     case "SET_USER":
-      return { ...initAuthState, currentUser: action.payload };
+      return {
+        ...initAuthState,
+        currentUser: action.payload,
+        isLoading: false,
+      };
     case "LOGIN_SUCCESS":
       return { ...initAuthState, currentUser: action.payload };
     case "LOGOUT_SUCCESS":
-      return { ...initAuthState, currentUser: null };
+      return { ...initAuthState, currentUser: null, isLoading: false };
     case "REGISTER_SUCCESS":
       return { ...initAuthState, currentUser: action.payload };
     default:

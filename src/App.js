@@ -7,11 +7,7 @@ import "./App.css";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import firebase from "./firebase/firebase";
 import { connect } from "react-redux";
-import {
-  SetCurrentUser,
-  LoginAction,
-  LogoutAction,
-} from "./store/actions/index";
+import { SetCurrentUser } from "./store/actions/index";
 
 class App extends React.Component {
   componentDidMount = () => {
@@ -27,11 +23,21 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {this.props.currentUser ? <Home /> : <Login />}
+            {this.props.currentUser ? (
+              <Home />
+            ) : this.props.isLoading ? (
+              <div>loading</div>
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
 
           <Route path="/register">
             {this.props.currentUser ? <Redirect to="/" /> : <Register />}
+          </Route>
+
+          <Route path="/login">
+            {this.props.currentUser ? <Redirect to="/" /> : <Login />}
           </Route>
         </Switch>
       </BrowserRouter>
@@ -40,11 +46,12 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { currentUser: state.currentUser.currentUser };
+  return {
+    currentUser: state.currentUser.currentUser,
+    isLoading: state.currentUser.isLoading,
+  };
 };
 
 export default connect(mapStateToProps, {
   SetCurrentUser,
-  LoginAction,
-  LogoutAction,
 })(App);
