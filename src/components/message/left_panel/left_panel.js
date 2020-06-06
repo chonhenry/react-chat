@@ -10,7 +10,7 @@ import UserInfo from "../userInfo/userInfo";
 import SearchResult from "../searchResult/searchResult";
 
 class LeftPanel extends Component {
-  state = { search: "" };
+  state = { search: "", searchResult: {} };
 
   onClickLogout = () => {
     firebase
@@ -29,9 +29,8 @@ class LeftPanel extends Component {
 
   onSearchSubmit = (e) => {
     e.preventDefault();
-    console.log(`search ${this.state.search}`);
 
-    this.props.toggleSearchResult();
+    this.setState({ search: "" });
 
     firebase
       .firestore()
@@ -40,10 +39,15 @@ class LeftPanel extends Component {
       .get()
       .then((snapshot) => {
         if (snapshot.docs.length) {
-          console.log(snapshot.docs[0].data());
+          // console.log(snapshot.docs[0].data());
+          this.setState({ searchResult: snapshot.docs[0].data() });
         } else {
-          console.log("No user found");
+          // console.log("No user found");
+          this.setState({ searchResult: {} });
         }
+      })
+      .then(() => {
+        this.props.toggleSearchResult();
       });
   };
 
@@ -51,8 +55,11 @@ class LeftPanel extends Component {
     return (
       <div className="home-container">
         {this.props.userInfo ? <UserInfo /> : null}
-        {/* {this.props.showSearchResult ? <SearchResult /> : null} */}
-        <SearchResult />
+        {this.props.showSearchResult ? (
+          <SearchResult
+            result={this.state.searchResult ? this.state.searchResult : null}
+          />
+        ) : null}
 
         <div className="left-panel">
           <div className="user-info">
