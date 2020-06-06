@@ -1,0 +1,54 @@
+.user-info-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .user-info {
+    background-color: white;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .fas {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .title {
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .info {
+      margin-bottom: 30px;
+      font-size: 20px;
+    }
+
+    .logout-btn {
+      border: 1px black solid;
+      font-weight: bold;
+      padding: 10px 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

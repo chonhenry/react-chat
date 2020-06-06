@@ -30,6 +30,16 @@ const authReducer = (state = initAuthState, action) => {
   }
 };
 
+const toggleUserInfoReducer = (state = false, action) => {
+  switch (action.type) {
+    case "USER_INFO":
+      return !state;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   currentUser: authReducer,
+  userInfo: toggleUserInfoReducer,
 });

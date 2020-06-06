@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import firebase from "../../../firebase/firebase";
 import "./home.scss";
+import UserInfo from "../userInfo/userInfo";
 import { connect } from "react-redux";
+import { toogleUserInfo } from "../../../store/actions/index";
 // import { Link } from "react-router-dom";
 // import { connect } from "react-redux";
 // import { LogoutAction } from "../../store/actions/index";
@@ -37,11 +39,17 @@ class Home extends Component {
   render() {
     return (
       <div className="home-container">
+        {this.props.userInfo ? <UserInfo /> : null}
+        {/* <UserInfo /> */}
+
         <div className="left-panel">
           <div className="user-info">
             <div className="signin-as">
               Signin as{" "}
-              <span className="display-name">
+              <span
+                className="display-name"
+                onClick={this.props.toogleUserInfo}
+              >
                 {this.props.currentUser.displayName}
               </span>
             </div>
@@ -60,6 +68,7 @@ class Home extends Component {
           </div>
           <div className="chat-record"></div>
         </div>
+
         <div className="right-panel"></div>
       </div>
     );
@@ -69,7 +78,8 @@ class Home extends Component {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser.currentUser,
+    userInfo: state.userInfo,
   };
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, { toogleUserInfo })(Home);

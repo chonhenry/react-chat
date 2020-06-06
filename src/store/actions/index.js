@@ -4,6 +4,12 @@ export const SetCurrentUser = (currentUser) => {
   return { type: "SET_USER", payload: currentUser };
 };
 
+export const toogleUserInfo = () => {
+  return {
+    type: "USER_INFO",
+  };
+};
+
 // export const RegisterAction = (info) => {
 //   return (dispatch, getState) => {
 //     firebase
