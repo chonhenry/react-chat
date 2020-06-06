@@ -2,7 +2,6 @@ import { combineReducers } from "redux";
 // import firebase from "../../firebase/firebase";
 
 const initAuthState = { currentUser: null, isLoading: true };
-
 const authReducer = (state = initAuthState, action) => {
   switch (action.type) {
     case "SET_USER":
@@ -30,6 +29,36 @@ const authReducer = (state = initAuthState, action) => {
   }
 };
 
+const initSelectUserState = { selectedUser: null };
+const selectUserReducer = (state = initSelectUserState, action) => {
+  switch (action.type) {
+    case "SELECT_USER":
+      return { ...initSelectUserState, selectedUser: action.payload };
+    default:
+      return state;
+  }
+};
+
+const initChatState = { selectedChat: [] };
+const chatsReducer = (state = initChatState, action) => {
+  switch (action.type) {
+    case "SELECT_CHAT":
+      return { ...initChatState, selectedChat: action.payload };
+    default:
+      return state;
+  }
+};
+
+const initUserChats = { userChats: [] };
+const userChatsReducer = (state = initUserChats, action) => {
+  switch (action.type) {
+    case "SET_USER_CHATS":
+      return { ...initUserChats, userChats: action.payload };
+    default:
+      return state;
+  }
+};
+
 const toggleUserInfoReducer = (state = false, action) => {
   switch (action.type) {
     case "USER_INFO":
@@ -52,4 +81,8 @@ export default combineReducers({
   currentUser: authReducer,
   userInfo: toggleUserInfoReducer,
   showSearchResult: toggleSearchResultReducer,
+  selectedUser: selectUserReducer,
+  chats: chatsReducer,
+  // selectedChat: chatsReducer,
+  userChats: userChatsReducer,
 });

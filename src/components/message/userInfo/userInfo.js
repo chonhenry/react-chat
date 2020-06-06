@@ -6,7 +6,8 @@ import "./userInfo.scss";
 
 class UserInfo extends React.Component {
   onClickLogout = () => {
-    // this.props.LogoutAction();
+    this.props.toggleUserInfo();
+
     firebase
       .auth()
       .signOut()

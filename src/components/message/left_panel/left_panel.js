@@ -5,12 +5,19 @@ import { connect } from "react-redux";
 import {
   toggleUserInfo,
   toggleSearchResult,
+  selectChat,
+  setUserChats,
 } from "../../../store/actions/index";
 import UserInfo from "../userInfo/userInfo";
 import SearchResult from "../searchResult/searchResult";
+import ChatsList from "../chatsList/chatsList";
 
 class LeftPanel extends Component {
-  state = { search: "", searchResult: {} };
+  state = { search: "", searchResult: {}, chatsList: [] };
+
+  componentDidMount = () => {
+    this.filterChatsList();
+  };
 
   onClickLogout = () => {
     firebase
@@ -30,8 +37,6 @@ class LeftPanel extends Component {
   onSearchSubmit = (e) => {
     e.preventDefault();
 
-    this.setState({ search: "" });
-
     firebase
       .firestore()
       .collection("users")
@@ -39,15 +44,32 @@ class LeftPanel extends Component {
       .get()
       .then((snapshot) => {
         if (snapshot.docs.length) {
-          // console.log(snapshot.docs[0].data());
           this.setState({ searchResult: snapshot.docs[0].data() });
         } else {
-          // console.log("No user found");
           this.setState({ searchResult: {} });
         }
       })
       .then(() => {
         this.props.toggleSearchResult();
+      });
+  };
+
+  filterChatsList = () => {
+    firebase
+      .firestore()
+      .collection("chats")
+      .get()
+      .then((snapshot) => {
+        let filteredChatsList = [];
+        filteredChatsList = snapshot.docs.filter(
+          (doc) =>
+            this.props.currentUser.displayName === doc.data().createdBy.name ||
+            this.props.currentUser.displayName === doc.data().to.name
+        );
+
+        filteredChatsList = filteredChatsList.map((doc) => doc.data());
+
+        this.props.setUserChats(filteredChatsList);
       });
   };
 
@@ -72,7 +94,7 @@ class LeftPanel extends Component {
                 {this.props.currentUser.displayName}
               </span>
             </div>
-            <button onClick={this.onClickLogout}>logout</button>
+            {/* <button onClick={this.onClickLogout}>logout</button> */}
           </div>
           <div className="search-box">
             <form onSubmit={this.onSearchSubmit}>
@@ -85,7 +107,7 @@ class LeftPanel extends Component {
               <button>Search</button>
             </form>
           </div>
-          <div className="chat-record"></div>
+          <ChatsList />
         </div>
       </div>
     );
@@ -97,9 +119,13 @@ const mapStateToProps = (state) => {
     currentUser: state.currentUser.currentUser,
     userInfo: state.userInfo,
     showSearchResult: state.showSearchResult,
+    // selectedChat: state.selectedChat.selectedChat,
   };
 };
 
-export default connect(mapStateToProps, { toggleUserInfo, toggleSearchResult })(
-  LeftPanel
-);
+export default connect(mapStateToProps, {
+  toggleUserInfo,
+  toggleSearchResult,
+  selectChat,
+  setUserChats,
+})(LeftPanel);

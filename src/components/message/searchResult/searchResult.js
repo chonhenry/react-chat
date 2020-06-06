@@ -1,22 +1,46 @@
 //searchResult
 import React from "react";
 import firebase from "../../../firebase/firebase";
-import { toggleSearchResult } from "../../../store/actions/index";
+import { toggleSearchResult, selectUser } from "../../../store/actions/index";
 import { connect } from "react-redux";
 import "./searchResult.scss";
 
 class SearchResult extends React.Component {
   componentDidMount = () => {
-    // console.log(this.props.currentUser.displayName);
     // if (this.props.result.name) {
-    //   console.log(this.props.result.uid);
-    //   console.log(this.props.currentUser.uid);
+    //   console.log(this.props.result);
     // } else {
     //   console.log("no result found");
     // }
   };
 
-  onClickSendMessage = () => {};
+  onClickCreateChat = () => {
+    var addData = {
+      createdAt: new Date(),
+      createdBy: {
+        uid: this.props.currentUser.uid,
+        name: this.props.currentUser.displayName,
+        email: this.props.currentUser.email,
+      },
+      to: {
+        uid: this.props.result.uid,
+        name: this.props.result.name,
+        email: this.props.result.email,
+      },
+    };
+
+    firebase
+      .firestore()
+      .collection("chats")
+      .add(addData)
+      .then((res) => {
+        firebase.firestore().collection("chats").doc(res.id).update({
+          chat_id: res.id,
+        });
+      });
+
+    this.props.toggleSearchResult();
+  };
 
   renderResult = () => {
     if (this.props.result.name) {
@@ -32,7 +56,7 @@ class SearchResult extends React.Component {
           <div className="title">Username</div>
           <div className="info">{this.props.result.name}</div>
           {this.props.result.uid === this.props.currentUser.uid ? null : (
-            <div className="confirm-btn" onClick={this.onClickSendMessage}>
+            <div className="confirm-btn" onClick={this.onClickCreateChat}>
               Click to send message
             </div>
           )}
@@ -63,4 +87,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { toggleSearchResult })(SearchResult);
+export default connect(mapStateToProps, { toggleSearchResult, selectUser })(
+  SearchResult
+);
