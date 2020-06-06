@@ -4,9 +4,15 @@ export const SetCurrentUser = (currentUser) => {
   return { type: "SET_USER", payload: currentUser };
 };
 
-export const toogleUserInfo = () => {
+export const toggleUserInfo = () => {
   return {
     type: "USER_INFO",
+  };
+};
+
+export const toggleSearchResult = () => {
+  return {
+    type: "SEARCH_RESULT",
   };
 };
 

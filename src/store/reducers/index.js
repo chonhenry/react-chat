@@ -39,7 +39,17 @@ const toggleUserInfoReducer = (state = false, action) => {
   }
 };
 
+const toggleSearchResultReducer = (state = false, action) => {
+  switch (action.type) {
+    case "SEARCH_RESULT":
+      return !state;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   currentUser: authReducer,
   userInfo: toggleUserInfoReducer,
+  showSearchResult: toggleSearchResultReducer,
 });

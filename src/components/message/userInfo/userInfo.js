@@ -1,15 +1,10 @@
 import React, { Component } from "react";
-// import UserInfo from "../userInfo/userInfo";
 import firebase from "../../../firebase/firebase";
-import { toogleUserInfo } from "../../../store/actions/index";
+import { toggleUserInfo } from "../../../store/actions/index";
 import { connect } from "react-redux";
 import "./userInfo.scss";
 
 class UserInfo extends React.Component {
-  componentDidMount = () => {
-    // console.log(this.props.currentUser.displayName);
-  };
-
   onClickLogout = () => {
     // this.props.LogoutAction();
     firebase
@@ -27,7 +22,7 @@ class UserInfo extends React.Component {
         <div className="user-info">
           <i
             className="fas fa-times fa-2x"
-            onClick={this.props.toogleUserInfo}
+            onClick={this.props.toggleUserInfo}
           />
           <div className="title">Username</div>
           <div className="info">{this.props.currentUser.displayName}</div>
@@ -48,6 +43,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { toogleUserInfo })(UserInfo);
+export default connect(mapStateToProps, { toggleUserInfo })(UserInfo);
 
 //<i class="fas fa-times"></i>

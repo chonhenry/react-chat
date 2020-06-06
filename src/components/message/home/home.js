@@ -2,21 +2,17 @@ import React, { Component } from "react";
 import firebase from "../../../firebase/firebase";
 import "./home.scss";
 import UserInfo from "../userInfo/userInfo";
+import SearchResult from "../searchResult/searchResult";
+import LeftPanel from "../left_panel/left_panel";
+import RightPanel from "../right_panel/right_panel";
 import { connect } from "react-redux";
-import { toogleUserInfo } from "../../../store/actions/index";
+// import { toogleUserInfo } from "../../../store/actions/index";
 // import { Link } from "react-router-dom";
-// import { connect } from "react-redux";
-// import { LogoutAction } from "../../store/actions/index";
 
 class Home extends Component {
   state = { search: "" };
 
-  componentDidMount = () => {
-    // console.log(this.props.currentUser.displayName);
-  };
-
   onClickLogout = () => {
-    // this.props.LogoutAction();
     firebase
       .auth()
       .signOut()
@@ -32,44 +28,19 @@ class Home extends Component {
 
   onSearchSubmit = (e) => {
     e.preventDefault();
-    // this.setState({ search: "" });
     console.log(`search ${this.state.search}`);
   };
 
   render() {
     return (
       <div className="home-container">
-        {this.props.userInfo ? <UserInfo /> : null}
+        {/* {this.props.userInfo ? <UserInfo /> : null} */}
         {/* <UserInfo /> */}
 
-        <div className="left-panel">
-          <div className="user-info">
-            <div className="signin-as">
-              Signin as{" "}
-              <span
-                className="display-name"
-                onClick={this.props.toogleUserInfo}
-              >
-                {this.props.currentUser.displayName}
-              </span>
-            </div>
-            <button onClick={this.onClickLogout}>logout</button>
-          </div>
-          <div className="search-box">
-            <form onSubmit={this.onSearchSubmit}>
-              <input
-                type="text"
-                placeholder="search"
-                value={this.state.search}
-                onChange={this.onSearchChange}
-              />
-              <button>search</button>
-            </form>
-          </div>
-          <div className="chat-record"></div>
-        </div>
+        {/* {this.props.showSearchResult ? <SearchResult /> : null} */}
 
-        <div className="right-panel"></div>
+        <LeftPanel />
+        <RightPanel />
       </div>
     );
   }
@@ -79,7 +50,46 @@ const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser.currentUser,
     userInfo: state.userInfo,
+    showSearchResult: state.showSearchResult,
   };
 };
 
-export default connect(mapStateToProps, { toogleUserInfo })(Home);
+export default connect(mapStateToProps)(Home);
+
+// render() {
+//   return (
+//     <div className="home-container">
+//       {this.props.userInfo ? <UserInfo /> : null}
+//       {/* <UserInfo /> */}
+
+//       <div className="left-panel">
+//         <div className="user-info">
+//           <div className="signin-as">
+//             Signin as{" "}
+//             <span
+//               className="display-name"
+//               onClick={this.props.toogleUserInfo}
+//             >
+//               {this.props.currentUser.displayName}
+//             </span>
+//           </div>
+//           <button onClick={this.onClickLogout}>logout</button>
+//         </div>
+//         <div className="search-box">
+//           <form onSubmit={this.onSearchSubmit}>
+//             <input
+//               type="text"
+//               placeholder="search"
+//               value={this.state.search}
+//               onChange={this.onSearchChange}
+//             />
+//             <button>search</button>
+//           </form>
+//         </div>
+//         <div className="chat-record"></div>
+//       </div>
+
+//       <div className="right-panel"></div>
+//     </div>
+//   );
+// }

@@ -6,43 +6,14 @@
   margin: auto;
   display: flex;
   align-items: center;
-
-  .left-panel {
-    background-color: lightseagreen;
-    width: 300px;
-    height: 100%;
-
-    .user-info {
-      border-bottom: 1px red solid;
-      height: 60px;
-      display: flex;
-      align-items: center;
-
-      .signin-as {
-        // border: 1px red solid;
-        font-size: 20px;
-        margin-left: 10px;
-        color: white;
-
-        .display-name {
-          text-decoration: underline;
-        }
-      }
-    }
-
-    .search-box {
-      border-bottom: 1px red solid;
-      height: 60px;
-    }
-
-    .chat-record {
-      background-color: red;
-    }
-  }
-
-  .right-panel {
-    background-color: lightgray;
-    width: 600px;
-    height: 100%;
-  }
 }
+
+// // getting data with condition
+// db.collection("cafes")
+//   .where("city", "==", "New York")
+//   .get()
+//   .then((snapshot) => {
+//     snapshot.docs.forEach((doc) => {
+//       renderCafe(doc);
+//     });
+//   });
