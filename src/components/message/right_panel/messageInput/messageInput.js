@@ -3,7 +3,7 @@ import "./messageInput.scss";
 
 class MessageInput extends Component {
   render() {
-    return <div></div>;
+    return <div className="message-input">s</div>;
   }
 }
 export default MessageInput;
