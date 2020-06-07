@@ -3,6 +3,7 @@ import firebase from "../../../../firebase/firebase";
 import { connect } from "react-redux";
 import ChatBox from "../chatBox/chatBox";
 import "./chatsList.scss";
+import { setChatsList } from "../../../../store/actions/index";
 
 class ChatsList extends Component {
   state = { filteredList: [] };
@@ -20,25 +21,32 @@ class ChatsList extends Component {
       .firestore()
       .collection("chats")
       .onSnapshot((snapshot) => {
-        this.setState({
-          filteredList: snapshot.docs.map((chat) => chat.data()),
-        });
+        let entireList = snapshot.docs.map((chat) => chat.data());
+
+        this.props.setChatsList(
+          entireList.filter((chat) => {
+            let currentUserName = this.props.currentUser.displayName;
+            if (
+              chat.createdBy.name === currentUserName ||
+              chat.to.name === currentUserName
+            ) {
+              return chat;
+            } else {
+              return;
+            }
+          })
+        );
       });
   };
 
   renderChatsList = () => {
-    return this.state.filteredList.map((chat) => {
+    return this.props.chatsList.map((chat) => {
       let currentUserName = this.props.currentUser.displayName;
 
-      if (
-        chat.createdBy.name === currentUserName ||
-        chat.to.name === currentUserName
-      ) {
-        if (chat.createdBy.name !== currentUserName) {
-          return <ChatBox name={chat.createdBy.name} chatId={chat.chat_id} />;
-        } else {
-          return <ChatBox name={chat.to.name} chatId={chat.chat_id} />;
-        }
+      if (chat.createdBy.name !== currentUserName) {
+        return <ChatBox name={chat.createdBy.name} key={chat.chat_id} />;
+      } else {
+        return <ChatBox name={chat.to.name} key={chat.chat_id} />;
       }
     });
   };
@@ -51,7 +59,8 @@ class ChatsList extends Component {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser.currentUser,
+    chatsList: state.chatsList,
   };
 };
 
-export default connect(mapStateToProps)(ChatsList);
+export default connect(mapStateToProps, { setChatsList })(ChatsList);

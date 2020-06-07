@@ -3,8 +3,8 @@ import "./register.scss";
 import firebase from "../../../firebase/firebase";
 import { Link } from "react-router-dom";
 // import { Redirect, Link } from "react-router-dom";
-// import { connect } from "react-redux";
-// import { RegisterAction } from "../../../store/actions/index";
+import { connect } from "react-redux";
+import { SetCurrentUser } from "../../../store/actions/index";
 
 class Register extends Component {
   state = {
@@ -32,18 +32,19 @@ class Register extends Component {
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then((createdUser) => {
-          console.log("register success");
-          console.log(createdUser.user);
+          // console.log("register success");
+          // console.log(firebase.auth().currentUser);
+
           this.setState({ error: "" });
           createdUser.user
             .updateProfile({
               displayName: this.state.displayName,
             })
             .then(() => {
-              console.log(createdUser);
+              // console.log(createdUser);
               this.saveUser(createdUser)
                 .then(() => {
-                  console.log("user saved");
+                  // this.props.SetCurrentUser(firebase.auth().currentUser);
                 })
                 .catch((error) => {
                   console.log(error.message);
@@ -133,7 +134,7 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default connect(null, { SetCurrentUser })(Register);
 
 // const mapStateToProps = (state) => {
 //   return { currentUser: state.currentUser.currentUser };

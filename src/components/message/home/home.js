@@ -12,6 +12,10 @@ import { connect } from "react-redux";
 class Home extends Component {
   state = { search: "" };
 
+  componentDidMount = () => {
+    
+  };
+
   onSearchChange = (e) => {
     this.setState({ search: e.target.value });
   };

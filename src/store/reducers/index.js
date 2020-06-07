@@ -10,20 +10,6 @@ const authReducer = (state = initAuthState, action) => {
         currentUser: action.payload,
         isLoading: false,
       };
-    // case "LOGIN_SUCCESS":
-    //   return {
-    //     ...initAuthState,
-    //     currentUser: action.payload,
-    //     isLoading: false,
-    //   };
-    // case "LOGOUT_SUCCESS":
-    //   return { ...initAuthState, currentUser: null, isLoading: true };
-    // case "REGISTER_SUCCESS":
-    //   return {
-    //     ...initAuthState,
-    //     currentUser: action.payload,
-    //     isLoading: false,
-    //   };
     default:
       return state;
   }
@@ -43,7 +29,7 @@ const initChatState = { selectedChat: [] };
 const chatsReducer = (state = initChatState, action) => {
   switch (action.type) {
     case "SELECT_CHAT":
-      return { ...initChatState, selectedChat: action.payload };
+      return { ...state, selectedChat: action.payload };
     default:
       return state;
   }
@@ -67,11 +53,22 @@ const toggleSearchResultReducer = (state = false, action) => {
   }
 };
 
+const initChatsListState = [];
+const chatsListReducer = (state = initChatsListState, action) => {
+  switch (action.type) {
+    case "SET_CHAT_LIST":
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   currentUser: authReducer,
   userInfo: toggleUserInfoReducer,
   showSearchResult: toggleSearchResultReducer,
   selectedUser: selectUserReducer,
+  chatsList: chatsListReducer,
   chats: chatsReducer,
   // selectedChat: chatsReducer,
   // userChats: userChatsReducer,

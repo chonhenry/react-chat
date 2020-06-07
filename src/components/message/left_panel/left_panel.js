@@ -71,6 +71,7 @@ class LeftPanel extends Component {
   };
 
   render() {
+    const { displayName } = this.props.currentUser;
     return (
       <div className="left-panel">
         {this.props.userInfo ? <UserInfo /> : null}
@@ -84,7 +85,7 @@ class LeftPanel extends Component {
           <div className="signin-as">
             Signin as{" "}
             <span className="display-name" onClick={this.props.toggleUserInfo}>
-              {this.props.currentUser.displayName}
+              {displayName ? displayName : "New User"}
             </span>
           </div>
           {/* <button onClick={this.onClickLogout}>logout</button> */}

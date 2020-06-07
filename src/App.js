@@ -30,7 +30,11 @@ class App extends React.Component {
         ) : (
           <Switch>
             <Route exact path="/">
-              {this.props.currentUser ? <Home /> : <Redirect to="/login" />}
+              {this.props.currentUser && this.props.currentUser ? (
+                <Home />
+              ) : (
+                <Redirect to="/login" />
+              )}
             </Route>
 
             <Route path="/register">
