@@ -1,4 +1,4 @@
-import firebase from "../../firebase/firebase";
+// import firebase from "../../firebase/firebase";
 
 export const SetCurrentUser = (currentUser) => {
   return { type: "SET_USER", payload: currentUser };

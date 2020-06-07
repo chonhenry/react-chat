@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import firebase from "../../../firebase/firebase";
 import { toggleUserInfo } from "../../../store/actions/index";
 import { connect } from "react-redux";
@@ -45,5 +45,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { toggleUserInfo })(UserInfo);
-
-//<i class="fas fa-times"></i>

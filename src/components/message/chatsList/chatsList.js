@@ -3,26 +3,49 @@ import firebase from "../../../firebase/firebase";
 import { connect } from "react-redux";
 
 class ChatsList extends Component {
-  state = { a: [1, 2, 3, 4] };
+  state = { filteredList: [] };
 
   componentDidMount = () => {
-    // console.log(this.props.userChatsList);
+    this.getChatsList();
+  };
+
+  componentWillUnmount = () => {
+    this.unsub();
+  };
+
+  getChatsList = () => {
+    this.unsub = firebase
+      .firestore()
+      .collection("chats")
+      .onSnapshot((snapshot) => {
+        this.setState({
+          filteredList: snapshot.docs.map((chat) => chat.data()),
+        });
+      });
   };
 
   renderChatsList = () => {
-    return this.props.userChatsList.map((chat) => {
-      if (chat.createdBy.name !== this.props.currentUser.displayName) {
-        return (
-          <div className="chat-box" key={chat.chat_id}>
-            {chat.createdBy.name}
-          </div>
-        );
-      } else {
-        return (
-          <div className="chat-box" key={chat.chat_id}>
-            {chat.to.name}
-          </div>
-        );
+    return this.state.filteredList.map((chat) => {
+      let currentUserName = this.props.currentUser.displayName;
+
+      if (
+        chat.createdBy.name === currentUserName ||
+        chat.to.name === currentUserName
+      ) {
+        console.log(chat.chat_id);
+        if (chat.createdBy.name !== currentUserName) {
+          return (
+            <div className="chat-box" key={chat.chat_id}>
+              {chat.createdBy.name}
+            </div>
+          );
+        } else {
+          return (
+            <div className="chat-box" key={chat.chat_id}>
+              {chat.to.name}
+            </div>
+          );
+        }
       }
     });
   };

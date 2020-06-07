@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import firebase from "../../../firebase/firebase";
+// import firebase from "../../../firebase/firebase";
 import "./home.scss";
-import UserInfo from "../userInfo/userInfo";
-import SearchResult from "../searchResult/searchResult";
+// import UserInfo from "../userInfo/userInfo";
+// import SearchResult from "../searchResult/searchResult";
 import LeftPanel from "../left_panel/left_panel";
 import RightPanel from "../right_panel/right_panel";
 import { connect } from "react-redux";
@@ -11,16 +11,6 @@ import { connect } from "react-redux";
 
 class Home extends Component {
   state = { search: "" };
-
-  onClickLogout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(console.log("logout success"))
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
 
   onSearchChange = (e) => {
     this.setState({ search: e.target.value });
