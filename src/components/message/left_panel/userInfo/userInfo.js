@@ -1,6 +1,6 @@
 import React from "react";
-import firebase from "../../../firebase/firebase";
-import { toggleUserInfo } from "../../../store/actions/index";
+import firebase from "../../../../firebase/firebase";
+import { toggleUserInfo } from "../../../../store/actions/index";
 import { connect } from "react-redux";
 import "./userInfo.scss";
 

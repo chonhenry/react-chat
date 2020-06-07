@@ -1,1 +1,11 @@
-.chat-list{}
+.chat-list-container {
+  position: absolute;
+  top: 120px;
+  bottom: 0;
+  width: 100%;
+  overflow: auto;
+  //   .chat-list {
+  //     height: 100%;
+  //     overflow: scroll;
+  //   }
+}

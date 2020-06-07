@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import firebase from "../../../../firebase/firebase";
 import { connect } from "react-redux";
+import ChatBox from "../chatBox/chatBox";
+import "./chatsList.scss";
 
 class ChatsList extends Component {
   state = { filteredList: [] };
@@ -32,19 +34,10 @@ class ChatsList extends Component {
         chat.createdBy.name === currentUserName ||
         chat.to.name === currentUserName
       ) {
-        console.log(chat.chat_id);
         if (chat.createdBy.name !== currentUserName) {
-          return (
-            <div className="chat-box" key={chat.chat_id}>
-              {chat.createdBy.name}
-            </div>
-          );
+          return <ChatBox name={chat.createdBy.name} chatId={chat.chat_id} />;
         } else {
-          return (
-            <div className="chat-box" key={chat.chat_id}>
-              {chat.to.name}
-            </div>
-          );
+          return <ChatBox name={chat.to.name} chatId={chat.chat_id} />;
         }
       }
     });

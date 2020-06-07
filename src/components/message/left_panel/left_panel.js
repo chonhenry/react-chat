@@ -7,8 +7,8 @@ import {
   toggleSearchResult,
   selectChat,
 } from "../../../store/actions/index";
-import UserInfo from "../userInfo/userInfo";
-import SearchResult from "../searchResult/searchResult";
+import UserInfo from "./userInfo/userInfo";
+import SearchResult from "./searchResult/searchResult";
 import ChatsList from "./chatsList/chatsList";
 
 class LeftPanel extends Component {
@@ -72,7 +72,7 @@ class LeftPanel extends Component {
 
   render() {
     return (
-      <div className="home-container">
+      <div className="left-panel">
         {this.props.userInfo ? <UserInfo /> : null}
         {this.props.showSearchResult ? (
           <SearchResult
@@ -80,32 +80,27 @@ class LeftPanel extends Component {
           />
         ) : null}
 
-        <div className="left-panel">
-          <div className="user-info">
-            <div className="signin-as">
-              Signin as{" "}
-              <span
-                className="display-name"
-                onClick={this.props.toggleUserInfo}
-              >
-                {this.props.currentUser.displayName}
-              </span>
-            </div>
-            {/* <button onClick={this.onClickLogout}>logout</button> */}
+        <div className="user-info">
+          <div className="signin-as">
+            Signin as{" "}
+            <span className="display-name" onClick={this.props.toggleUserInfo}>
+              {this.props.currentUser.displayName}
+            </span>
           </div>
-          <div className="search-box">
-            <form onSubmit={this.onSearchSubmit}>
-              <input
-                type="text"
-                placeholder="Search by email"
-                value={this.state.search}
-                onChange={this.onSearchChange}
-              />
-              <button>Search</button>
-            </form>
-          </div>
-          <ChatsList />
+          {/* <button onClick={this.onClickLogout}>logout</button> */}
         </div>
+        <div className="search-box">
+          <form onSubmit={this.onSearchSubmit}>
+            <input
+              type="text"
+              placeholder="Search by email"
+              value={this.state.search}
+              onChange={this.onSearchChange}
+            />
+            <button>Search</button>
+          </form>
+        </div>
+        <ChatsList />
       </div>
     );
   }

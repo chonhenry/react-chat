@@ -1,19 +1,14 @@
 //searchResult
 import React from "react";
-import firebase from "../../../firebase/firebase";
-import { toggleSearchResult, selectUser } from "../../../store/actions/index";
+import firebase from "../../../../firebase/firebase";
+import {
+  toggleSearchResult,
+  selectUser,
+} from "../../../../store/actions/index";
 import { connect } from "react-redux";
 import "./searchResult.scss";
 
 class SearchResult extends React.Component {
-  componentDidMount = () => {
-    // if (this.props.result.name) {
-    //   console.log(this.props.result);
-    // } else {
-    //   console.log("no result found");
-    // }
-  };
-
   onClickCreateChat = () => {
     var addData = {
       createdAt: new Date(),
