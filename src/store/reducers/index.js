@@ -15,21 +15,11 @@ const authReducer = (state = initAuthState, action) => {
   }
 };
 
-const initSelectUserState = { selectedUser: null };
+const initSelectUserState = {};
 const selectUserReducer = (state = initSelectUserState, action) => {
   switch (action.type) {
     case "SELECT_USER":
-      return { ...initSelectUserState, selectedUser: action.payload };
-    default:
-      return state;
-  }
-};
-
-const initChatState = { selectedChat: [] };
-const chatsReducer = (state = initChatState, action) => {
-  switch (action.type) {
-    case "SELECT_CHAT":
-      return { ...state, selectedChat: action.payload };
+      return action.payload;
     default:
       return state;
   }
@@ -63,13 +53,24 @@ const chatsListReducer = (state = initChatsListState, action) => {
   }
 };
 
+const initSelectedChatState = "";
+const selectedChatReducer = (state = initSelectedChatState, action) => {
+  switch (action.type) {
+    case "SELECT_CHAT":
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   currentUser: authReducer,
   userInfo: toggleUserInfoReducer,
   showSearchResult: toggleSearchResultReducer,
   selectedUser: selectUserReducer,
   chatsList: chatsListReducer,
-  chats: chatsReducer,
+  selectedChat: selectedChatReducer,
+  //chats: chatsReducer,
   // selectedChat: chatsReducer,
   // userChats: userChatsReducer,
 });
@@ -79,6 +80,16 @@ export default combineReducers({
 //   switch (action.type) {
 //     case "SET_USER_CHATS":
 //       return { ...initUserChats, userChats: action.payload };
+//     default:
+//       return state;
+//   }
+// };
+
+// const initChatState = { selectedChat: [] };
+// const chatsReducer = (state = initChatState, action) => {
+//   switch (action.type) {
+//     case "SELECT_CHAT":
+//       return { ...state, selectedChat: action.payload };
 //     default:
 //       return state;
 //   }

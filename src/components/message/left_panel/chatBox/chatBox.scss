@@ -18,4 +18,12 @@
     font-size: 30px;
     color: white;
   }
+
+  &:hover {
+    background-color: darkcyan;
+  }
+}
+
+.chat-box.clicked {
+  background-color: rgb(8, 83, 83);
 }

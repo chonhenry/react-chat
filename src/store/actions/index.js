@@ -1,4 +1,4 @@
-// import firebase from "../../firebase/firebase";
+import firebase from "../../firebase/firebase";
 
 export const SetCurrentUser = (currentUser) => {
   return { type: "SET_USER", payload: currentUser };
@@ -27,8 +27,20 @@ export const setChatsList = (chatsList) => {
   };
 };
 
-export const selectUser = (selectedUser) => {
-  return { type: "SELECT_USER", payload: selectedUser };
+export const selectUser = (selectedUserUid) => {
+  return async (dispatch) => {
+    let selectedUser;
+
+    firebase
+      .firestore()
+      .collection("users")
+      .where("uid", "==", selectedUserUid)
+      .get()
+      .then((snapshot) => {
+        selectedUser = snapshot.docs[0].data();
+        dispatch({ type: "SELECT_USER", payload: selectedUser });
+      });
+  };
 };
 
 export const selectChat = (selectedChat) => {

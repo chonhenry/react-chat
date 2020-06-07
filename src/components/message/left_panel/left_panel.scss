@@ -17,7 +17,12 @@
       color: white;
 
       .display-name {
+        font-weight: bold;
         text-decoration: underline;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
@@ -25,5 +30,20 @@
   .search-box {
     border-bottom: 1px red solid;
     height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    input {
+      width: 250px;
+      height: 30px;
+      padding: 0 15px;
+      border-radius: 20px;
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
   }
 }

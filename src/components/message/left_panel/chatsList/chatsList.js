@@ -20,15 +20,16 @@ class ChatsList extends Component {
     this.unsub = firebase
       .firestore()
       .collection("chats")
+      .orderBy("createdAt", "desc")
       .onSnapshot((snapshot) => {
         let entireList = snapshot.docs.map((chat) => chat.data());
 
         this.props.setChatsList(
           entireList.filter((chat) => {
-            let currentUserName = this.props.currentUser.displayName;
+            let currentUserUid = this.props.currentUser.uid;
             if (
-              chat.createdBy.name === currentUserName ||
-              chat.to.name === currentUserName
+              chat.createdBy.uid === currentUserUid ||
+              chat.to.uid === currentUserUid
             ) {
               return chat;
             } else {
@@ -44,9 +45,23 @@ class ChatsList extends Component {
       let currentUserName = this.props.currentUser.displayName;
 
       if (chat.createdBy.name !== currentUserName) {
-        return <ChatBox name={chat.createdBy.name} key={chat.chat_id} />;
+        return (
+          <ChatBox
+            name={chat.createdBy.name}
+            uid={chat.createdBy.uid}
+            chatId={chat.chat_id}
+            key={chat.chat_id}
+          />
+        );
       } else {
-        return <ChatBox name={chat.to.name} key={chat.chat_id} />;
+        return (
+          <ChatBox
+            name={chat.to.name}
+            uid={chat.to.uid}
+            chatId={chat.chat_id}
+            key={chat.chat_id}
+          />
+        );
       }
     });
   };

@@ -1,0 +1,32 @@
+.selected-user-bar {
+  height: 60px;
+  background: lightseagreen;
+  border-left: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .talking-to {
+    margin-left: 30px;
+    font-size: 20px;
+    color: white;
+
+    .selected-user-name {
+      font-weight: bold;
+      text-decoration: underline;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  i {
+    margin-right: 30px;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

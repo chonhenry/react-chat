@@ -90,17 +90,19 @@ class LeftPanel extends Component {
           </div>
           {/* <button onClick={this.onClickLogout}>logout</button> */}
         </div>
+
         <div className="search-box">
-          <form onSubmit={this.onSearchSubmit}>
+          <form className="search-box-form" onSubmit={this.onSearchSubmit}>
             <input
               type="text"
               placeholder="Search by email"
               value={this.state.search}
               onChange={this.onSearchChange}
             />
-            <button>Search</button>
+            {/* <button>Search</button> */}
           </form>
         </div>
+
         <ChatsList />
       </div>
     );
