@@ -49,16 +49,6 @@ const chatsReducer = (state = initChatState, action) => {
   }
 };
 
-const initUserChats = { userChats: [] };
-const userChatsReducer = (state = initUserChats, action) => {
-  switch (action.type) {
-    case "SET_USER_CHATS":
-      return { ...initUserChats, userChats: action.payload };
-    default:
-      return state;
-  }
-};
-
 const toggleUserInfoReducer = (state = false, action) => {
   switch (action.type) {
     case "USER_INFO":
@@ -84,5 +74,15 @@ export default combineReducers({
   selectedUser: selectUserReducer,
   chats: chatsReducer,
   // selectedChat: chatsReducer,
-  userChats: userChatsReducer,
+  // userChats: userChatsReducer,
 });
+
+// const initUserChats = { userChats: [] };
+// const userChatsReducer = (state = initUserChats, action) => {
+//   switch (action.type) {
+//     case "SET_USER_CHATS":
+//       return { ...initUserChats, userChats: action.payload };
+//     default:
+//       return state;
+//   }
+// };

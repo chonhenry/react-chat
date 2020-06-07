@@ -20,13 +20,13 @@ export const selectUser = (selectedUser) => {
   return { type: "SELECT_USER", payload: selectedUser };
 };
 
-export const setUserChats = (userChats) => {
-  return { type: "SET_USER_CHATS", payload: userChats };
-};
-
 export const selectChat = (selectedChat) => {
   return { type: "SELECT_CHAT", payload: selectedChat };
 };
+
+// export const setUserChats = (userChats) => {
+//   return { type: "SET_USER_CHATS", payload: userChats };
+// };
 
 // export const RegisterAction = (info) => {
 //   return (dispatch, getState) => {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import firebase from "../../../firebase/firebase";
+import firebase from "../../../../firebase/firebase";
 import { connect } from "react-redux";
 
 class ChatsList extends Component {
@@ -51,20 +51,12 @@ class ChatsList extends Component {
   };
 
   render() {
-    return (
-      <div
-        className="chat-list"
-        onClick={() => console.log(this.props.userChatsList)}
-      >
-        {this.renderChatsList()}
-      </div>
-    );
+    return <div className="chat-list">{this.renderChatsList()}</div>;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    userChatsList: state.userChats.userChats,
     currentUser: state.currentUser.currentUser,
   };
 };

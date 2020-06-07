@@ -6,11 +6,10 @@ import {
   toggleUserInfo,
   toggleSearchResult,
   selectChat,
-  setUserChats,
 } from "../../../store/actions/index";
 import UserInfo from "../userInfo/userInfo";
 import SearchResult from "../searchResult/searchResult";
-import ChatsList from "../chatsList/chatsList";
+import ChatsList from "./chatsList/chatsList";
 
 class LeftPanel extends Component {
   state = { search: "", searchResult: {}, chatsList: [] };
@@ -68,8 +67,6 @@ class LeftPanel extends Component {
         );
 
         filteredChatsList = filteredChatsList.map((doc) => doc.data());
-
-        this.props.setUserChats(filteredChatsList);
       });
   };
 
@@ -127,5 +124,4 @@ export default connect(mapStateToProps, {
   toggleUserInfo,
   toggleSearchResult,
   selectChat,
-  setUserChats,
 })(LeftPanel);
