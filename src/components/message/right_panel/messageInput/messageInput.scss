@@ -1,8 +1,38 @@
 .message-input {
-  height: 60px;
+  height: 80px;
   background: lightseagreen;
   border-left: 1px solid lightgray;
   position: absolute;
   width: 100%;
   bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  form {
+    width: 520px;
+
+    input {
+      width: 100%;
+      padding: 15px;
+      font-size: 15px;
+      border: none;
+      border-radius: 50px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  i {
+    background: white;
+    color: lightseagreen;
+    padding: 10px;
+    border-radius: 30px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

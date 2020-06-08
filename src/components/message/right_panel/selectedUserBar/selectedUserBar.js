@@ -10,9 +10,12 @@ class SelectedUserBar extends Component {
     return (
       <div className="selected-user-bar">
         <div className="talking-to">
-          You are talking to <span className='selected-user-name'>{this.props.selectedUser.name}</span>
+          You are talking to{" "}
+          <span className="selected-user-name">
+            {this.props.selectedUser.name}
+          </span>
         </div>
-        <i className="fas fa-ellipsis-v fa-2x"></i>
+        <i className="fas fa-trash fa-2x"></i>
       </div>
     );
   }
