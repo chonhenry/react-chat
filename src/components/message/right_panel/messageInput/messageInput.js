@@ -10,6 +10,7 @@ class MessageInput extends Component {
     e.preventDefault();
 
     if (this.props.selectedChat.length && this.state.message.length) {
+      // message to be added
       let addMessage = {
         from: {
           name: this.props.currentUser.displayName,
@@ -20,6 +21,7 @@ class MessageInput extends Component {
         message: this.state.message,
       };
 
+      // save message to firestore
       firebase
         .firestore()
         .collection("chats")

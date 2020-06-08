@@ -3,7 +3,7 @@ import firebase from "../../../../firebase/firebase";
 import { connect } from "react-redux";
 import ChatBox from "../chatBox/chatBox";
 import "./chatsList.scss";
-import { setChatsList } from "../../../../store/actions/index";
+import { setChatsList, selectChat } from "../../../../store/actions/index";
 
 class ChatsList extends Component {
   state = { filteredList: [] };
@@ -37,6 +37,8 @@ class ChatsList extends Component {
             }
           })
         );
+
+        this.props.selectChat(this.props.chatsList[0].chat_id);
       });
   };
 
@@ -78,4 +80,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setChatsList })(ChatsList);
+export default connect(mapStateToProps, { setChatsList, selectChat })(
+  ChatsList
+);
