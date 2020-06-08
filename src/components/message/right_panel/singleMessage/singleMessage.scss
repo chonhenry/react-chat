@@ -1,0 +1,24 @@
+.message {
+  //   background-color: yellow;
+  display: table;
+  //   max-width: 300px;
+  //   min-width: 100px;
+  margin-bottom: 5px;
+  padding: 10px 10px;
+  border-radius: 10px;
+
+  .from-name {
+    font-weight: bolder;
+  }
+
+  .message-text {
+  }
+}
+
+.own {
+  background-color: lightgreen;
+}
+
+.not-own {
+  background-color: white;
+}

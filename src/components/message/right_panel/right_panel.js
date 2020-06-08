@@ -18,7 +18,7 @@ class RightPanel extends Component {
     return (
       <div className="right-panel">
         <SelectedUserBar />
-        <MessageBoard />
+        {this.props.selectedChat.length ? <MessageBoard /> : null}
         {this.props.selectedChat.length ? <MessageInput /> : null}
       </div>
     );

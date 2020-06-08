@@ -1,8 +1,11 @@
 .message-boarder-container {
   position: absolute;
-  background: white;
+  overflow: auto;
+  background: wheat;
   width: 100%;
   top: 60px;
   bottom: 80px;
   padding: 10px;
+  // display: flex;
+  // flex-direction: column;
 }
