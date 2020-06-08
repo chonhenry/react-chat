@@ -2,19 +2,24 @@ import React, { Component } from "react";
 import "./right_panel.scss";
 import { connect } from "react-redux";
 // import {} from "../../../store/actions/index";
+import firebase from "../../../firebase/firebase";
 import SelectedUserBar from "./selectedUserBar/selectedUserBar";
 import MessageBoard from "./messageBoard/messageBoard";
 import MessageInput from "./messageInput/messageInput";
 
 class RightPanel extends Component {
-  componentDidMount = () => {};
+  state = { initChatMessages: [] };
+
+  // componentDidMount = () => {
+  //   firebase.firestore().collection()
+  // };
 
   render() {
     return (
       <div className="right-panel">
         <SelectedUserBar />
         <MessageBoard />
-        <MessageInput />
+        {this.props.selectedChat.length ? <MessageInput /> : null}
       </div>
     );
   }

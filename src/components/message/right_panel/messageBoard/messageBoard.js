@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import "./messageBoard.scss";
 import { connect } from "react-redux";
 import firebase from "../../../../firebase/firebase";
+import SingleMessage from "../singleMessage/singleMessage";
 
 class MessageBoard extends Component {
-  componentDidUpdate = () => {
-    if (this.props.selectedChat.length) {
-      //listen to messages change
+  // state = { selectedChatLength: 1, messages: [] };
+
+  componentDidMount = () => {
+    if (this.props.chatsList.length) {
+      // listen to messages change
       firebase
         .firestore()
         .collection("chats")
@@ -15,10 +18,14 @@ class MessageBoard extends Component {
         .orderBy("sentAt")
         .onSnapshot((snapshot) => {
           let messages = snapshot.docs.map((chat) => chat.data());
-          console.log(messages);
+          console.log("change");
         });
     }
   };
+
+  // componentDidUpdate = () => {
+  //   console.log("update");
+  // };
 
   render() {
     return <div className="message-boarder-container">s</div>;

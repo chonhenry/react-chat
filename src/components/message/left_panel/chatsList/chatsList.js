@@ -38,7 +38,7 @@ class ChatsList extends Component {
           })
         );
 
-        this.props.selectChat(this.props.chatsList[0].chat_id);
+        // this.props.selectChat(this.props.chatsList[0].chat_id);
       });
   };
 

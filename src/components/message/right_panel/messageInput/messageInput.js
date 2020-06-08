@@ -6,6 +6,20 @@ import firebase from "../../../../firebase/firebase";
 class MessageInput extends Component {
   state = { message: "" };
 
+  componentWillMount = () => {
+    // listen to messages change
+    firebase
+      .firestore()
+      .collection("chats")
+      .doc(this.props.selectedChat)
+      .collection("messages")
+      .orderBy("sentAt")
+      .onSnapshot((snapshot) => {
+        let messages = snapshot.docs.map((chat) => chat.data());
+        console.log("change");
+      });
+  };
+
   onMessageSubmit = (e) => {
     e.preventDefault();
 
@@ -28,6 +42,18 @@ class MessageInput extends Component {
         .doc(this.props.selectedChat)
         .collection("messages")
         .add(addMessage);
+
+      //listen to messages change
+      //   firebase
+      //     .firestore()
+      //     .collection("chats")
+      //     .doc(this.props.selectedChat)
+      //     .collection("messages")
+      //     .orderBy("sentAt")
+      //     .onSnapshot((snapshot) => {
+      //       let messages = snapshot.docs.map((chat) => chat.data());
+      //       console.log("change");
+      //     });
     }
   };
 
