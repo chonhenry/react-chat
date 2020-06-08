@@ -8,17 +8,36 @@ import MessageBoard from "./messageBoard/messageBoard";
 import MessageInput from "./messageInput/messageInput";
 
 class RightPanel extends Component {
-  state = { initChatMessages: [] };
+  state = { listener: null };
 
   // componentDidMount = () => {
   //   firebase.firestore().collection()
+  // };
+
+  // componentDidUpdate = () => {
+  //   console.log("right panel did update");
+  //   this.setState({
+  //     listener: firebase
+  //       .firestore()
+  //       .collection("chats")
+  //       .doc(this.props.selectedChat)
+  //       .collection("messages")
+  //       .orderBy("sentAt")
+  //       .onSnapshot((snapshot) => {
+  //         let messagesList = snapshot.docs.map((chat) => chat.data());
+  //         this.setState({ messages: messagesList });
+  //         // console.log(messagesList);
+  //       }),
+  //   });
   // };
 
   render() {
     return (
       <div className="right-panel">
         <SelectedUserBar />
-        {this.props.selectedChat.length ? <MessageBoard /> : null}
+        {this.props.selectedChat.length ? (
+          <MessageBoard chatId={this.props.selectedChat} />
+        ) : null}
         {this.props.selectedChat.length ? <MessageInput /> : null}
       </div>
     );

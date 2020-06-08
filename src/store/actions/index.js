@@ -27,19 +27,30 @@ export const setChatsList = (chatsList) => {
   };
 };
 
+export const setMessagesList = (messagesList) => {
+  return {
+    type: "SET_MESSAGE_LIST",
+    payload: messagesList,
+  };
+};
+
 export const selectUser = (selectedUserUid) => {
   return async (dispatch) => {
     let selectedUser;
 
-    firebase
-      .firestore()
-      .collection("users")
-      .where("uid", "==", selectedUserUid)
-      .get()
-      .then((snapshot) => {
-        selectedUser = snapshot.docs[0].data();
-        dispatch({ type: "SELECT_USER", payload: selectedUser });
-      });
+    if (selectedUserUid.length) {
+      firebase
+        .firestore()
+        .collection("users")
+        .where("uid", "==", selectedUserUid)
+        .get()
+        .then((snapshot) => {
+          selectedUser = snapshot.docs[0].data();
+          dispatch({ type: "SELECT_USER", payload: selectedUser });
+        });
+    } else {
+      dispatch({ type: "SELECT_USER", payload: {} });
+    }
   };
 };
 

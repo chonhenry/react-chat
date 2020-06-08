@@ -23,6 +23,7 @@ class ChatsList extends Component {
       .orderBy("createdAt", "desc")
       .onSnapshot((snapshot) => {
         let entireList = snapshot.docs.map((chat) => chat.data());
+        //console.log(entireList);
 
         this.props.setChatsList(
           entireList.filter((chat) => {

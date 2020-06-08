@@ -1,12 +1,21 @@
 import React from "react";
 import firebase from "../../../../firebase/firebase";
-import { toggleUserInfo } from "../../../../store/actions/index";
+import {
+  toggleUserInfo,
+  setChatsList,
+  selectUser,
+  selectChat,
+} from "../../../../store/actions/index";
 import { connect } from "react-redux";
 import "./userInfo.scss";
 
 class UserInfo extends React.Component {
   onClickLogout = () => {
     this.props.toggleUserInfo();
+
+    this.props.setChatsList([]);
+    this.props.selectUser("");
+    this.props.selectChat("");
 
     firebase
       .auth()
@@ -44,4 +53,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { toggleUserInfo })(UserInfo);
+export default connect(mapStateToProps, {
+  toggleUserInfo,
+  setChatsList,
+  selectUser,
+  selectChat,
+})(UserInfo);

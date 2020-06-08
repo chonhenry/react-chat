@@ -8,20 +8,6 @@ class MessageInput extends Component {
     message: "",
   };
 
-  componentDidMount = () => {
-    // listen to messages change
-    // firebase
-    //   .firestore()
-    //   .collection("chats")
-    //   .doc(this.props.selectedChat)
-    //   .collection("messages")
-    //   .orderBy("sentAt")
-    //   .onSnapshot((snapshot) => {
-    //     let messages = snapshot.docs.map((chat) => chat.data());
-    //     console.log(messages);
-    //   });
-  };
-
   onMessageSubmit = (e) => {
     e.preventDefault();
 
@@ -53,6 +39,8 @@ class MessageInput extends Component {
             .doc(res.id)
             .update({ messageId: res.id });
         });
+
+      this.setState({ message: "" });
     }
   };
 
@@ -68,6 +56,7 @@ class MessageInput extends Component {
             onChange={this.onMessageChange}
             type="text"
             placeholder="Type your message"
+            value={this.state.message}
           />
         </form>
         <i className="fas fa-pen fa-2x"></i>

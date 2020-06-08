@@ -53,6 +53,16 @@ const chatsListReducer = (state = initChatsListState, action) => {
   }
 };
 
+const initMessagesListState = [];
+const messagesListReducer = (state = initMessagesListState, action) => {
+  switch (action.type) {
+    case "SET_MESSAGE_LIST":
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 const initSelectedChatState = "";
 const selectedChatReducer = (state = initSelectedChatState, action) => {
   switch (action.type) {
@@ -69,6 +79,7 @@ export default combineReducers({
   showSearchResult: toggleSearchResultReducer,
   selectedUser: selectUserReducer,
   chatsList: chatsListReducer,
+  messagesList: messagesListReducer,
   selectedChat: selectedChatReducer,
   //chats: chatsReducer,
   // selectedChat: chatsReducer,

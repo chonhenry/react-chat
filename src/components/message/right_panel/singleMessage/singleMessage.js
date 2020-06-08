@@ -8,14 +8,14 @@ class SingleMessage extends Component {
   };
 
   render() {
-    const { email, name, uid } = this.props.user;
+    const { uid } = this.props.user;
     return (
       <div
         className={`message ${
           this.isOwnMessage(this.props.user.uid) ? "own" : "not-own"
         }`}
       >
-        <div className="from-name">{name}</div>
+        {/* <div className="from-name">{name}</div> */}
         <div className="message-text">{this.props.message}</div>
       </div>
     );
