@@ -3,6 +3,7 @@ import "./right_panel.scss";
 import { connect } from "react-redux";
 // import {} from "../../../store/actions/index";
 import SelectedUserBar from "./selectedUserBar/selectedUserBar";
+import MessageBoard from "./messageBoard/messageBoard";
 import MessageInput from "./messageInput/messageInput";
 
 class RightPanel extends Component {
@@ -12,6 +13,7 @@ class RightPanel extends Component {
     return (
       <div className="right-panel">
         <SelectedUserBar />
+        <MessageBoard />
         <MessageInput />
       </div>
     );
