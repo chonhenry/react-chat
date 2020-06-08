@@ -1,211 +1,11 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import "./messageBoard.scss";
 import { connect } from "react-redux";
 import firebase from "../../../../firebase/firebase";
 import SingleMessage from "../singleMessage/singleMessage";
 
 class MessageBoard extends Component {
-  // state = {
-  //   message: [
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message:
-  //         "i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "i am sofia",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message: "how are you?",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "i am good",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "nice to meet you",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message: "nice to meet you too",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message:
-  //         "i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "i am sofia",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message: "how are you?",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "i am good",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "nice to meet you",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message: "nice to meet you too",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message:
-  //         "i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "i am sofia",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message: "how are you?",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "i am good",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "nice to meet you",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message: "nice to meet you too",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message:
-  //         "i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily i am lily",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "i am sofia",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message: "how are you?",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "i am good",
-  //     },
-  //     {
-  //       from: {
-  //         email: "sofia@gmail.com",
-  //         name: "sofia",
-  //         uid: "cCsdnvZ4PhaQX6ZTArtSCQsHpHn1",
-  //       },
-  //       message: "nice to meet you",
-  //     },
-  //     {
-  //       from: {
-  //         email: "lily@gmail.com",
-  //         name: "lily",
-  //         uid: "2fSqEP6Wxod9ezoEaCilrGb0Gsz1",
-  //       },
-  //       message: "nice to meet you too",
-  //     },
-  //   ],
-  // };
-
   state = { messages: [] };
 
   componentDidMount = () => {
@@ -225,14 +25,28 @@ class MessageBoard extends Component {
     }
   };
 
+  componentWillUpdate = () => {
+    const node = ReactDOM.findDOMNode(this);
+    this.shouldScrollToBottom =
+      node.scrollTop + node.clientHeight >= node.scrollHeight;
+  };
+
+  componentDidUpdate = () => {
+    if (this.shouldScrollToBottom) {
+      const node = ReactDOM.findDOMNode(this);
+      node.scrollTop = node.scrollHeight;
+    }
+  };
+
   render() {
     return (
-      <div
-        className="message-boarder-container"
-        onScroll={() => console.log("scroll")}
-      >
+      <div className="message-boarder-container">
         {this.state.messages.map((message) => (
-          <SingleMessage message={message.message} user={message.from} />
+          <SingleMessage
+            key={message.messageId}
+            message={message.message}
+            user={message.from}
+          />
         ))}
       </div>
     );

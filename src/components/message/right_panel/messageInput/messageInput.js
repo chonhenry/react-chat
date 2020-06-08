@@ -43,7 +43,16 @@ class MessageInput extends Component {
         .collection("chats")
         .doc(this.props.selectedChat)
         .collection("messages")
-        .add(addMessage);
+        .add(addMessage)
+        .then((res) => {
+          firebase
+            .firestore()
+            .collection("chats")
+            .doc(this.props.selectedChat)
+            .collection("messages")
+            .doc(res.id)
+            .update({ messageId: res.id });
+        });
     }
   };
 
