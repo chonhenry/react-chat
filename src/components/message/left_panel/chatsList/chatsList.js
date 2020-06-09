@@ -20,7 +20,7 @@ class ChatsList extends Component {
     this.unsub = firebase
       .firestore()
       .collection("chats")
-      .orderBy("createdAt", "desc")
+      .orderBy("lastUpdatedTime", "desc")
       .onSnapshot((snapshot) => {
         let entireList = snapshot.docs.map((chat) => chat.data());
         //console.log(entireList);

@@ -26,6 +26,7 @@ class SearchResult extends React.Component {
     if (!this.alreadyExist(this.props.result.name)) {
       var addData = {
         createdAt: new Date(),
+        lastUpdatedTime: new Date(),
         createdBy: {
           uid: this.props.currentUser.uid,
           name: this.props.currentUser.displayName,

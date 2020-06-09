@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import "./messageInput.scss";
 import { connect } from "react-redux";
 import firebase from "../../../../firebase/firebase";
-import { database } from "firebase";
+// import { database } from "firebase";
 
 class MessageInput extends Component {
   state = {
     message: "",
   };
 
-  onMessageSubmit = (e) => {
-    e.preventDefault();
-
+  sendMessage = () => {
     if (this.props.selectedChat.length && this.state.message.length) {
       // message to be added
       let addMessage = {
@@ -54,6 +52,11 @@ class MessageInput extends Component {
     }
   };
 
+  onMessageSubmit = (e) => {
+    e.preventDefault();
+    this.sendMessage();
+  };
+
   onMessageChange = (e) => {
     this.setState({ message: e.target.value });
   };
@@ -69,7 +72,7 @@ class MessageInput extends Component {
             value={this.state.message}
           />
         </form>
-        <i className="fas fa-pen fa-2x"></i>
+        <i className="fas fa-pen fa-2x" onClick={this.sendMessage}></i>
       </div>
     );
   }

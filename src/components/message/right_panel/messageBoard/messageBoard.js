@@ -123,16 +123,3 @@ export default connect(mapStateToProps, { setMessagesList })(MessageBoard);
 // return renderList.map((message) => (
 //   <SingleMessage message={message.message} user={message.from} />
 // ));
-
-{
-  /* {this.getMessagesList(this.props.selectedChat)} */
-}
-{
-  /* {this.state.messages.map((message) => (
-          <SingleMessage
-            key={message.messageId}
-            message={message.message}
-            user={message.from}
-          />
-        ))} */
-}
