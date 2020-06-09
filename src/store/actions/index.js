@@ -20,6 +20,12 @@ export const toggleSearchResult = () => {
   };
 };
 
+export const toggleRemoveChat = () => {
+  return {
+    type: "REMOVE_CHAT",
+  };
+};
+
 export const setChatsList = (chatsList) => {
   return {
     type: "SET_CHAT_LIST",

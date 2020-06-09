@@ -1,24 +1,12 @@
 import React, { Component } from "react";
 import "./selectedUserBar.scss";
-import firebase from "../../../../firebase/firebase";
+// import firebase from "../../../../firebase/firebase";
 import { connect } from "react-redux";
-import { selectChat } from "../../../../store/actions/index";
+import { selectChat, toggleRemoveChat } from "../../../../store/actions/index";
 
 class SelectedUserBar extends Component {
   onClickDelete = () => {
-    firebase
-      .firestore()
-      .collection("chats")
-      .doc(this.props.selectedChat)
-      .delete()
-      .then(() => {
-        console.log("delete");
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-
-    this.props.selectChat("");
+    this.props.toggleRemoveChat();
   };
 
   render() {
@@ -44,4 +32,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { selectChat })(SelectedUserBar);
+export default connect(mapStateToProps, { selectChat, toggleRemoveChat })(
+  SelectedUserBar
+);

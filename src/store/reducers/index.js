@@ -43,6 +43,15 @@ const toggleSearchResultReducer = (state = false, action) => {
   }
 };
 
+const toggleRemoveChatReducer = (state = false, action) => {
+  switch (action.type) {
+    case "REMOVE_CHAT":
+      return !state;
+    default:
+      return state;
+  }
+};
+
 const initChatsListState = [];
 const chatsListReducer = (state = initChatsListState, action) => {
   switch (action.type) {
@@ -81,6 +90,7 @@ export default combineReducers({
   chatsList: chatsListReducer,
   messagesList: messagesListReducer,
   selectedChat: selectedChatReducer,
+  showRemoveChat: toggleRemoveChatReducer,
   //chats: chatsReducer,
   // selectedChat: chatsReducer,
   // userChats: userChatsReducer,
