@@ -6,7 +6,7 @@ import "./chatsList.scss";
 import { setChatsList, selectChat } from "../../../../store/actions/index";
 
 class ChatsList extends Component {
-  state = { filteredList: [] };
+  // state = { filteredList: [] };
 
   componentDidMount = () => {
     this.getChatsList();

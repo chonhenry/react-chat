@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./messageInput.scss";
 import { connect } from "react-redux";
 import firebase from "../../../../firebase/firebase";
+import { database } from "firebase";
 
 class MessageInput extends Component {
   state = {
@@ -22,6 +23,15 @@ class MessageInput extends Component {
         sentAt: new Date(),
         message: this.state.message,
       };
+
+      // update last message time
+      firebase
+        .firestore()
+        .collection("chats")
+        .doc(this.props.selectedChat)
+        .update({
+          lastUpdatedTime: new Date(),
+        });
 
       // save message to firestore
       firebase

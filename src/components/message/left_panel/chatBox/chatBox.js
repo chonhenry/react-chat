@@ -2,12 +2,19 @@ import React, { Component } from "react";
 import "./chatBox.scss";
 import { connect } from "react-redux";
 import { selectChat, selectUser } from "../../../../store/actions/index";
-//import firebase from "../../../../firebase/firebase";
+import firebase from "../../../../firebase/firebase";
 
 class ChatBox extends Component {
   onClickChatBox = () => {
     this.props.selectChat(this.props.chatId);
     this.props.selectUser(this.props.uid);
+
+    // last seen time
+    firebase
+      .firestore()
+      .collection("chats")
+      .doc(this.props.chatId)
+      .update({ lastSeen: new Date() });
   };
 
   render() {

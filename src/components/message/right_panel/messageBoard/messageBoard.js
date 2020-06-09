@@ -10,57 +10,54 @@ class MessageBoard extends Component {
   state = { chatId: this.props.selectedChat, messages: [] };
 
   componentDidMount = () => {
-    // this.getMessagesList();
+    this.getMessagesList();
   };
 
-  getMessagesList = async (selectedChat) => {
-    let messagesList;
+  getMessagesList = () => {
+    let messagesList = [];
 
-    // this.unsub = firebase
-    //   .firestore()
-    //   .collection("chats")
-    //   .doc(selectedChat)
-    //   .collection("messages")
-    //   .orderBy("sentAt")
-    //   .onSnapshot((snapshot) => {
-    //     messagesList = snapshot.docs.map((chat) => chat.data());
-    //     //console.log(messagesList);
-    //     //this.props.setMessagesList(messagesList);
-    //   });
-
-    await firebase
+    this.unsub = firebase
       .firestore()
       .collection("chats")
-      .doc(selectedChat)
-      .collection("messages")
-      .orderBy("sentAt")
-      .get()
-      .then((snapshot) => {
-        messagesList = snapshot.docs.map((chat) => chat.data());
-        //console.log(messagesList);
-        //this.props.setMessagesList(messagesList);
+      .onSnapshot((snapshot) => {
+        // console.log(snapshot.docChanges()[0].doc.id);
+
+        if (snapshot.docChanges().length) {
+          //console.log("something changed");
+          firebase
+            .firestore()
+            .collection("chats")
+            .doc(this.props.selectedChat)
+            .collection("messages")
+            .orderBy("sentAt")
+            .get()
+            .then((snapshot) => {
+              messagesList = snapshot.docs.map((chat) => chat.data());
+              this.setState({ messages: messagesList });
+              //console.log(messagesList);
+            });
+        }
       });
 
     return messagesList;
   };
 
-  renderMessagesList = async () => {
-    let renderList = [];
-    // this.getMessagesList(this.props.selectedChat).then((res) => {
-    //   // (res) => (renderList = res)
-    //   console.log("res: ", res);
-    // });
-
-    return renderList.map((message) => (
-      <SingleMessage message={message.message} user={message.from} />
-    ));
+  renderMessagesList = () => {
+    return this.state.messages.map((message) => {
+      return (
+        <SingleMessage
+          key={message.messageId}
+          message={message.message}
+          user={message.from}
+        />
+      );
+    });
   };
 
   componentWillUpdate = () => {
     const node = ReactDOM.findDOMNode(this);
     this.shouldScrollToBottom =
       node.scrollTop + node.clientHeight >= node.scrollHeight;
-    // console.log("will update");
   };
 
   componentDidUpdate = () => {
@@ -68,8 +65,6 @@ class MessageBoard extends Component {
       const node = ReactDOM.findDOMNode(this);
       node.scrollTop = node.scrollHeight;
     }
-    //console.log("did update");
-    //this.unsub();
   };
 
   componentWillUnmount = () => {
@@ -78,16 +73,11 @@ class MessageBoard extends Component {
 
   render() {
     return (
-      <div className="message-boarder-container">
-        2{/* {this.renderMessagesList()} */}
-        {/* {this.getMessagesList(this.props.selectedChat)} */}
-        {/* {this.state.messages.map((message) => (
-          <SingleMessage
-            key={message.messageId}
-            message={message.message}
-            user={message.from}
-          />
-        ))} */}
+      <div
+        className="message-boarder-container"
+        // onClick={this.renderMessagesList}
+      >
+        {this.renderMessagesList()}
       </div>
     );
   }
@@ -103,3 +93,46 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { setMessagesList })(MessageBoard);
+
+//let renderList = [];
+// firebase
+//   .firestore()
+//   .collection("chats")
+//   .doc("T7V1tukkMtYnwZNXLaVo")
+//   .collection("messages")
+//   .orderBy("sentAt")
+//   .get()
+//   .then((snapshot) => {
+//     let messagesList = snapshot.docs.map((chat) => chat.data());
+//     // this.setState({ messages: messagesList });
+//     console.log(messagesList);
+//     renderList = messagesList;
+//   });
+//console.log(renderList);
+// this.unsub = firebase
+//   .firestore()
+//   .collection("chats")
+//   .doc(this.props.selectedChat)
+//   .collection("messages")
+//   .orderBy("sentAt")
+//   .onSnapshot((snapshot) => {
+//     renderList = snapshot.docs.map((chat) => chat.data());
+//     console.log(renderList);
+//     this.setState({ messages: renderList });
+//   });
+// return renderList.map((message) => (
+//   <SingleMessage message={message.message} user={message.from} />
+// ));
+
+{
+  /* {this.getMessagesList(this.props.selectedChat)} */
+}
+{
+  /* {this.state.messages.map((message) => (
+          <SingleMessage
+            key={message.messageId}
+            message={message.message}
+            user={message.from}
+          />
+        ))} */
+}

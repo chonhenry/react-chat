@@ -15,6 +15,7 @@ class SelectedUserBar extends Component {
             {this.props.selectedUser.name}
           </span>
         </div>
+
         <i className="fas fa-trash fa-2x"></i>
       </div>
     );
